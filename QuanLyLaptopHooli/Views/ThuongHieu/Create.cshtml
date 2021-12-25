@@ -1,0 +1,43 @@
+﻿@model QuanLyLaptopHooli.Models.thuonghieu
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>TẠO MỚI THƯƠNG HIỆU</h2>
+
+@using (Html.BeginForm("Create", "ThuongHieu", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <label class="control-label col-md-2">Tên thương hiệu:</label>
+            <div class="col-md-10">
+                <input type="text" size="70" name="TenTH" value="@ViewBag.TenDM" required />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Ảnh bìa:</label>
+            <div class="col-md-10">
+                <input type="file" name="fFileUpload" />
+                @ViewBag.ThongBao
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Thêm mới" class="btn btn-success" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

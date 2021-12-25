@@ -1,0 +1,51 @@
+﻿@model IEnumerable<QuanLyLaptopHooli.Models.khachhang>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>QUẢN LÝ KHÁCH HÀNG</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Họ tên
+        </th>
+        <th>
+            Tên đăng nhập
+        </th>
+        <th style="max-width: 255px;">
+            Địa chỉ
+        </th>
+        <th>
+            Số điện thoại
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.HoTen)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TenDangNhap)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DiaChi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SoDienThoai)
+        </td>
+        <td>
+            <a href="@Url.Action("Details", new{ id = item.id})" class=" btn btn-primary" role="button">Chi tiết</a>
+            <a href="@Url.Action("Delete", new{ id = item.id})" class=" btn btn-danger" role="button">Xóa</a>
+        </td>
+    </tr>
+}
+
+</table>

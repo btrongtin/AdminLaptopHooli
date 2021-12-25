@@ -1,0 +1,58 @@
+﻿@using QuanLyLaptopHooli.Models;
+@using PagedList.Mvc;
+@model PagedList.PagedList<QuanLyLaptopHooli.Models.thuonghieu>
+
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2 >QUẢN LÝ THƯƠNG HIỆU</h2>
+<p>
+    @Html.ActionLink("Tạo mới", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th style="text-align:center; width:140px">
+            Tên thương hiệu
+        </th>
+
+        <th style="text-align:center; width: 80px">
+            Ảnh bìa
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ten)
+            </td>
+            <td>
+                <img src="@item.hinhanh" style="width:50px" />
+            </td>
+            <td>
+                @*@Html.ActionLink("Sửa", "Edit", new { id = item.id }) |
+                    <a href="~/ThuongHieu/Details?id=@item.id">Chi Tiết</a> |
+                    @Html.ActionLink("Xóa", "Delete", new { id = item.id })*@
+
+                <a href="@Url.Action("Edit",new { id = item.id})" class=" btn btn-warning" role="button">Sửa</a>
+                <a href="@Url.Action("Details", new{ id = item.id})" class=" btn btn-primary" role="button">Chi tiết</a>
+                <a href="@Url.Action("Delete", new{ id = item.id})" class=" btn btn-danger" role="button">Xóa</a>
+            </td>
+        </tr>
+    }
+
+</table>
+Trang @(Model.PageCount < Model.PageNumber ? 0 :
+Model.PageNumber)/@Model.PageCount
+<div class="MenuTrang">
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }))
+</div>
+<style>
+    .MenuTrang {
+        display: inline;
+        text-align: center;
+    }
+</style>

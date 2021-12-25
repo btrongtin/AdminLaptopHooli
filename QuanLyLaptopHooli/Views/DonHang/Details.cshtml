@@ -1,0 +1,111 @@
+﻿@model QuanLyLaptopHooli.Models.donhang
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>THÔNG TIN ĐƠN HÀNG</h2>
+
+
+
+
+<div>
+    <hr />
+    <dl class="dl-horizontal" style="padding-left: 7.5px;padding-right:7.5px;margin-bottom:0;">
+        @*<dt>
+                ID:
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.id)
+            </dd>*@
+
+        <dt>
+            Ngày tạo:
+        </dt>
+
+        <dd>
+            @String.Format("{0:dd/MM/yyyy HH:mm tt}", Model.NgayTao)
+        </dd>
+
+        <dt>
+
+            Địa chỉ:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DiaChiGiaoHang)
+        </dd>
+
+        <dt>
+            Số điện thoại:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SoDienThoaiGiaoHang)
+        </dd>
+
+        <dt>
+            Khách hàng:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.khachhang.HoTen)
+        </dd>
+        <dt>
+            Tổng tiền:
+        </dt>
+
+        <dd>
+            @Html.FormatValue(Model.TongTien, "{0:#,##0}")VNĐ
+        </dd>
+
+
+
+
+
+
+
+    </dl>
+    @using (Html.BeginForm())
+    {
+        @*<dt>Trạng thái giao hàng:</dt>
+            <dd>
+                @Html.DropDownList("MaTrangThaiGiaoHang");
+            </dd>*@
+
+
+
+        <div class="form-horizontal">
+            <div class="form-group">
+                <label class="control-label col-md-2">Mã đơn hàng:</label>
+                <div class="col-md-4">
+                    <input type="text" size="70" name="iMaDH" value="@Model.id" readonly style="width:120px;" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-4">Trạng thái giao hàng:</label>
+                <div class="col-md-10">
+                    @Html.DropDownList("MaTrangThaiGiaoHang");
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="LƯU THÔNG TIN" class="btn btn-success mb-4" />
+                </div>
+            </div>
+        </div>
+
+
+    }
+
+</div>
+
+
+
+
+@Html.Action("ChiTietDonHangPartial", "DonHang")
+
+<p>
+    @Html.ActionLink("VỀ TRANG QUẢN LÝ SẢN PHẨM", "Index")
+</p>

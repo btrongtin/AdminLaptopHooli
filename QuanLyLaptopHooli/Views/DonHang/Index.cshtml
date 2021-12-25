@@ -1,0 +1,98 @@
+﻿@using QuanLyLaptopHooli.Models;
+@using PagedList.Mvc;
+@model PagedList.PagedList<QuanLyLaptopHooli.Models.donhang>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@helper Truncate(String s, int length)
+{
+    if (s.Length < length)
+    {
+        @s
+    }
+    else
+    {
+        @s.Substring(0, length) <text> ... </text>
+
+    }
+}
+
+<h2 class="mb-md-3">QUẢN LÝ ĐƠN HÀNG</h2>
+
+<table class="table table-hover">
+    <thead style="text-align: center;">
+        <tr>
+            <th>
+                ID
+            </th>
+            <th>
+                Ngày tạo
+            </th>
+            <th style="width: 200px;">
+                Địa chỉ giao hàng
+            </th>
+            <th>
+                Số điện thoại
+            </th>
+            <th>
+                Tổng tiền
+            </th>
+            <th>
+                Khách hàng
+            </th>
+            <th>
+                Trạng thái
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody style="text-align: center;">
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.id)
+                </td>
+                <td>
+                    @*@Html.DisplayFor(modelItem => item.NgayTao)*@
+                    @String.Format("{0:dd/MM/yyyy HH:mm tt}", item.NgayTao)
+                </td>
+                <td style="text-align: justify;">
+                    @Html.Raw(Truncate(item.DiaChiGiaoHang, 70).ToString())
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SoDienThoaiGiaoHang)
+                </td>
+                <td>
+                    @Html.FormatValue(item.TongTien, "{0:#,##0}")VNĐ
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.khachhang.HoTen)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.trangthaigiaohang.TenTrangThai)
+                </td>
+                <td>
+
+                    <a href="@Url.Action("Details", new{ id = item.id})" class=" btn btn-primary" role="button">Chi tiết</a>
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+Trang @(Model.PageCount < Model.PageNumber ? 0 :
+Model.PageNumber)/@Model.PageCount
+<div class="MenuTrang">
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }))
+</div>
+<style>
+    .MenuTrang {
+        display: inline;
+        text-align: center;
+    }
+</style>

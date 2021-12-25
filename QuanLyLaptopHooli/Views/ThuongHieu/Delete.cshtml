@@ -1,0 +1,53 @@
+﻿@model QuanLyLaptopHooli.Models.thuonghieu
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>XÁC NHẬN THÔNG TIN CẦN XÓA</h2>
+
+<style type="text/css">
+    img {
+        width: 200px;
+        margin-bottom: 20px;
+    }
+
+    h3, h4 {
+        color: red;
+        font-weight: bold;
+    }
+</style>
+
+<h3>Bạn quyết định xóa thương hiệu này?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Tên thương hiệu
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ten)
+        </dd>
+
+        <dt>
+            Logo
+        </dt>
+
+        <dd>
+            <img src="@Model.hinhanh" alt="@Model.hinhanh" />
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div class=" form-actions no-color">
+            <input type="submit" value="XÓA" class="btn btn-success" /> |
+            @Html.ActionLink("VỀ TRANG QUẢN LÝ SẢN PHẢM", "Index")
+        </div>
+
+    }
+</div>

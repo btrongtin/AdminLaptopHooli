@@ -1,0 +1,93 @@
+﻿@model QuanLyLaptopHooli.Models.sanpham
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>ĐIỀU CHỈNH THÔNG TIN LAPTOP</h2>
+
+@using (Html.BeginForm("Edit", "SanPham", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <label class="control-label col-md-2">Mã sản phẩm:</label>
+            <div class="col-md-10">
+                <input type="text" size="70" name="iMaSP" value="@Model.id" readonly />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Tên sản phẩm:</label>
+            <div class="col-md-10">
+                <input type="text" size="70" name="sTenSP" value="@Model.Ten" required />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Mô tả:</label>
+            <div class="col-md-10">
+                @*<textarea name="sMoTa"><p>@Model.MoTa.Replace("\n", "</p><p>")</p></textarea>*@
+                @Html.TextArea("sMoTa", new { @class = "textarea", @id = "summernote" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Ảnh bìa:</label>
+            <div class="col-md-10">
+                <input type="file" name=" fFileUpload" />
+                <img src="@Model.HinhAnh" width="120">(Ảnh hiện tại)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Số lượng tồn:</label>
+            <div class="col-md-10">
+                <input type="number" min="1" required name="iSoLuong" value="@Model.SoLuong" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">Giá bán:</label>
+            <div class="col-md-10">
+                <input type="number" min="1" required name="mGiaban" value="@Model.Gia" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">Thương hiệu:</label>
+            <div class="col-md-10">
+                @Html.DropDownList("MaThuongHieu");
+            </div>
+        </div>
+
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="LƯU THÔNG TIN" class="btn btn-success" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("vỀ TRANG QUẢN LÝ SẢN PHẨM", "Index")
+</div>
+
+
+
+@section scripts {
+    <script>
+$(document).ready(function () {
+            $('#summernote').summernote({
+                placeholder: 'Your comment',
+                tabsize: 2,
+                height: 100
+            });
+        });</script>
+}

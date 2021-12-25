@@ -1,0 +1,38 @@
+﻿@model QuanLyLaptopHooli.Models.thuonghieu
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style type="text/css">
+    img {
+        width: 200px;
+        margin-bottom: 20px;
+    }
+</style>
+<div>
+    <h4>Chi Tiết Thương Hiệu</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Tên thương hiệu:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ten)
+        </dd>
+
+        <dt>
+            Logo: 
+        </dt>
+
+        <dd>
+            <img src="@Model.hinhanh" alt="@Model.ten" />
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
